@@ -7,6 +7,7 @@ import {CalendarOutlined,FolderOutlined,FireFilled} from '@ant-design/icons'
 import Item from 'antd/lib/list/Item'
 import style from "../styles/index.module.css"
 import Author from "../component/Author"
+import Advert from '../component/Advert'
 
 const Home =()=>{
   const [mylist,setMylist]=  useState([
@@ -42,6 +43,7 @@ const Home =()=>{
           </Col>
           <Col className="comm-right" xs={0} sm={0} md={7} lg={5} xl={4}>
             <Author />
+            <Advert />
           </Col>
       </Row>
     </>
