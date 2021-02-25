@@ -21,7 +21,15 @@ export default (appInfo: EggAppInfo) => {
     app: true,      // 是否加载到app上
     agent: false    // 是否加载到agent上
   };
-
+  config.security = {
+    　　　　csrf: {enable: false},
+    　　　　domainWhiteList: [ '*' ]
+  };
+  config.cors = {
+    origin: 'http://localhost:3000', //只允许这个域进行访问接口
+    credentials: true,   // 开启认证
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS'
+  };
   // add your special config in here
   const bizConfig = {
     sourceUrl: `https://github.com/eggjs/examples/tree/master/${appInfo.name}`,

@@ -1,6 +1,6 @@
 import React,{ useState} from 'react'
 import Head from 'next/head'
-
+import Link from 'next/link'
 import {Button,Row,Col,List} from 'antd'
 import Header from '../component/Header'
 import {CalendarOutlined,FolderOutlined,FireFilled} from '@ant-design/icons'
@@ -10,9 +10,11 @@ import Author from "../component/Author"
 import Advert from '../component/Advert'
 import Footer from '../component/Footer'
 import axios from 'axios'
+import servicePath from '../config/apiUrl'
 
 
 interface IListData {
+  id:number;
   title:string;
   addTime:Date;
   view_count:number;
@@ -43,7 +45,11 @@ const Home =(list:any)=>{
               dataSource={mylist}
               renderItem={item=>(
                 <List.Item>
-                  <div className="list_title">{item.title}</div>
+                  <div className="list_title">
+                    <Link href={{pathname:'/detailed',query:{id:item.id}}}>
+                      <a>{item.title}</a>
+                    </Link>
+                  </div>
                   <div className="list_icon">
                         <span><CalendarOutlined />{item.addTime}  </span>
                         <span><FolderOutlined />{item.typeName}  </span>
@@ -67,8 +73,9 @@ const Home =(list:any)=>{
 }
 Home.getInitialProps=async ()=>{
   const promise= new Promise((resolve,reject)=>{
-          axios('http://127.0.0.1:7001/default/getArticleList').then(
+          axios(servicePath.getArticleList).then(
             (res)=>{
+              console.log(res.data.data)
               resolve(res.data)
             }
           ).catch(
