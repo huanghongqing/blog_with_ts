@@ -5,9 +5,10 @@ import {Button,Row,Col,List} from 'antd'
 import Header from '../component/Header'
 import {CalendarOutlined,FolderOutlined,FireFilled} from '@ant-design/icons'
 import Item from 'antd/lib/list/Item'
-import style from "../styles/index.module.css"
+// import style from "../styles/index.module.css"
 import Author from "../component/Author"
 import Advert from '../component/Advert'
+import Footer from '../component/Footer'
 
 const Home =()=>{
   const [mylist,setMylist]=  useState([
@@ -30,13 +31,13 @@ const Home =()=>{
               dataSource={mylist}
               renderItem={item=>(
                 <List.Item>
-                  <div className={style.list_title}>{item.title}</div>
-                  <div className={style.list_icon}>
+                  <div className="list_title">{item.title}</div>
+                  <div className="list_icon">
                         <span><CalendarOutlined />{item.addTime}  </span>
                         <span><FolderOutlined />{item.typeName}  </span>
                         <span><FireFilled />{item.view_count}  </span>
                   </div>
-                  <div className={style.list_context}>{item.context}</div>
+                  <div className="list_context">{item.context}</div>
                 </List.Item>
               )}
             />
@@ -45,6 +46,9 @@ const Home =()=>{
             <Author />
             <Advert />
           </Col>
+      </Row>
+      <Row className="comm-main"  justify="center">
+        <Footer />
       </Row>
     </>
   )

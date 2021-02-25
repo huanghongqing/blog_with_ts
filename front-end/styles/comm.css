@@ -15,6 +15,38 @@ body{
     border-bottom:1px solid #eee;
   
   }
+  .comm-right{
+    background-color: #FFF;
+    margin-left: .5rem;
+    padding:.3rem;
+    border-radius: .3rem;
+    border-bottom:1px solid #eee;
+  
+  }
   .comm-main{
     margin-top: .5rem;
   }
+
+  /* 用下划线，不能用中间连接线“-”，不然module.css 引入报错 */
+.list_title{
+  font-size:1.3rem;
+  color: #1e90ff;
+  padding: 0 0.5rem;
+}
+.list_context{
+  color:#777;
+  padding:.5rem;
+}
+.list_icon{
+  padding:.5rem 0;
+  color:#AAA;
+}
+.list_icon span{
+  display: inline-block;
+  padding: 0 10px;
+}
+.bread-div {
+  padding: .5rem;
+  border-bottom: 1px solid #eee;
+  background-color: #e1f0ff;
+}
