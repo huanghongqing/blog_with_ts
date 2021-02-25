@@ -1,8 +1,8 @@
 import 'egg';
 
 declare module 'egg' {
-/** mysql 执行结果  */
-interface MysqlExecuteResult {
+  /** mysql 执行结果  */
+  interface MysqlExecuteResult {
     /** 影响行数 */
     affectedRows: number;
     /**
