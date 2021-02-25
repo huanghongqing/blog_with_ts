@@ -10,6 +10,18 @@ export default (appInfo: EggAppInfo) => {
   // add your egg config in here
   config.middleware = [];
 
+  config.mysql = {
+    client: {
+      host: 'localhost',//数据库连接地址
+      port: 3306,//端口号
+      user: 'root',//用户名
+      password: '123456',//密码
+      database: 'blog'//数据库名
+    },
+    app: true,      // 是否加载到app上
+    agent: false    // 是否加载到agent上
+  };
+
   // add your special config in here
   const bizConfig = {
     sourceUrl: `https://github.com/eggjs/examples/tree/master/${appInfo.name}`,

@@ -4,6 +4,9 @@ import { Controller } from 'egg';
 export default class HomeController extends Controller{
 
     async index(){
-        this.ctx.body="api接口..."
+        let result =await this.app.mysql.get("article",{});
+        console.log(result);
+        this.ctx.body=result;
+        
     }
 }
