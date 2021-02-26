@@ -28,6 +28,7 @@ export default (appInfo: EggAppInfo) => {
   config.cors = {
     origin: 'http://localhost:3000', //只允许这个域进行访问接口
     credentials: true,   // 开启认证
+    // origin: '*',
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS'
   };
   // add your special config in here
