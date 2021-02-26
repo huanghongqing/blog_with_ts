@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@zeit/next-css": "^1.0.1",
     "antd": "^4.12.3",
     "axios": "^0.21.1",
     "highlight.js": "^10.6.0",

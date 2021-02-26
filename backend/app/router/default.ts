@@ -4,5 +4,6 @@ const router_default = app=>{
     router.get('/default/getArticleList',controller.default.home.getArticleList)
     router.get('/default/getArticleById/:id',controller.default.home.getArticleById)
     router.get('/default/getTypeInfo',controller.default.home.getTypeInfo)
+    router.get('/default/getListById/:id',controller.default.home.getListById)
 }
 export default router_default;

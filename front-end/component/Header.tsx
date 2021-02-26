@@ -32,7 +32,7 @@ const Header =()=>{
     )
     const handleClick=(e:any)=>{
         if(e.key==0){
-            Router.push('/index')
+            Router.push('/')
         }
         else{
             Router.push('/list?id='+e.key)
@@ -57,7 +57,7 @@ const Header =()=>{
                                     let iconType=item.icon;
                                     let Icon1=require('@ant-design/icons')[iconType] //动态加载antd图标
                                     return (
-                                        <Menu.Item key={item.id}>
+                                        <Menu.Item key={`${item.id}&typeName=${item.typeName}`}>
                                             <Icon1 />{item.typeName}
                                         </Menu.Item>
                                     )

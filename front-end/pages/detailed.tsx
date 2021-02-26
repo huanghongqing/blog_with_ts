@@ -23,6 +23,7 @@ interface IListData {
   addTime:Date;
   view_count:number;
   typeName:string;
+  typeId:number;
 }
 
 const Detailed = (article:IListData) => {
@@ -60,7 +61,7 @@ const Detailed = (article:IListData) => {
                 <div className="bread-div">
                   <Breadcrumb>
                     <Breadcrumb.Item><a href="/">Home</a></Breadcrumb.Item>
-                    <Breadcrumb.Item><a href="/list">{article.typeName}</a></Breadcrumb.Item>
+                    <Breadcrumb.Item><a href="/list?{article.typeId}">{article.typeName}</a></Breadcrumb.Item>
                     <Breadcrumb.Item>{article.title}</Breadcrumb.Item>
                   </Breadcrumb>
                 </div>

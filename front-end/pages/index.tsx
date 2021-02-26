@@ -11,11 +11,13 @@ import Advert from '../component/Advert'
 import Footer from '../component/Footer'
 import axios from 'axios'
 import servicePath from '../config/apiUrl'
-
+import marked from "marked"
+import hljs from "highlight.js"
 
 interface IListData {
   id:number;
   title:string;
+  introduce:string;
   addTime:Date;
   view_count:number;
   content:string;
@@ -25,6 +27,20 @@ interface IListData {
 const Home =(list:any)=>{
   let li:IListData[]=list.data
   const [mylist,setMylist]=  useState(li)
+  const renderer=new marked.Renderer()
+  marked.setOptions({
+    renderer:renderer,
+    gfm:true, //github 风格？
+    //容错
+    pedantic: false,
+    //是否忽略html标签
+    sanitize: false,
+    breaks: false,
+    smartLists: true,
+    highlight: function(code){
+      return hljs.highlightAuto(code).value
+    }
+  })
   // ([
   //   {title:'T-72B3',context:'库存T-72B改进的延寿升级型，T-72B3的改进分mod.2011、mod.2014、mod.2016三个阶段。最初火炮、火控及装甲比照T-72BM升级，无线电和车内灭火、防爆系统亦得到升级。炮塔新增“松树”-U多通道瞄准仪，新型的Р-168-25У-2通讯系统。其2A46M-5滑膛炮新增3BM59"Svinets-1"(贫铀穿甲弹)和3BM60"Svinets-2"(钨合金穿甲弹)等两款新弹药。动力系统有配备V-92S2有的还是V-84，后期升级了“化石”反应装甲。俄罗斯将大约1000余辆旧型T-72B翻修至此规格。',addTime:"2020-01-01",typeName:"warthunder",view_count:100},
   //   {title:'T-80B',context:'T-80B配备了与T-64B相同的K型复合装甲、125毫米2A46M-1滑膛炮等装备，并装备功率达1100匹的GTD-1000TF燃气轮机。[16]2A46M滑膛炮能发射9M112“眼镜蛇”反坦克导弹，能攻击4千米内的坦克或5千米内的直升机,换装新式125毫米2A46M-4滑膛炮与新的自动装弹机，可发射神秘的新式Svinets-1（3BM59）与Svinets-2（3BM60）翼稳脱壳穿甲弹；据称前者为碳化钨合金弹芯，而后者为衰变铀弹芯，能有效贯穿2千米外超过700-740毫米厚的均质钢板（RHA）',addTime:"2020-01-01",typeName:"warthunder",view_count:100},
@@ -36,6 +52,46 @@ const Home =(list:any)=>{
       <Head>
         <title>Home</title>
       </Head>
+      <style jsx>{`
+                pre{
+                  display: block;
+                  background-color: #283646 !important;
+                  padding: .5rem !important;
+                  overflow-y: auto;
+                  font-weight: 300;
+                  font-family: Menlo, monospace;
+                  border-radius: .3rem;
+                }
+
+                pre >code{
+                  border:0px !important;
+                  background-color: #283646 !important;
+                  color:#FFF;
+
+                }
+                code {
+                  display: inline-block ;
+                  background-color:#f3f3f3;
+                  border:1px solid #fdb9cc;
+                  border-radius:3px;
+                  font-size: 12px;
+                  padding-left: 5px;
+                  padding-right: 5px;
+                  color:#4f4f4f;
+                  margin: 0px 3px;
+
+                }
+
+                .list-context img{
+                width:100% ;
+                border-radius:5px;
+                border:1px solid #f0f0f0;
+                max-width:1000px !important;
+                display: block;
+                margin:8px  auto ;
+
+                }      
+            `}</style>
       <Header></Header>
       <Row className="comm-main"  justify="center">
           <Col className="comm-left" xs={24} sm={24} md={16} lg={18} xl={14}  >
@@ -55,7 +111,10 @@ const Home =(list:any)=>{
                         <span><FolderOutlined />{item.typeName}  </span>
                         <span><FireFilled />{item.view_count}  </span>
                   </div>
-                  <div className="list_context">{item.content}</div>
+                  <div className="list_context"
+                    dangerouslySetInnerHTML={{__html:marked(item.introduce)}}
+                  >
+                  </div>
                 </List.Item>
               )}
             />
