@@ -37,8 +37,11 @@ export default class HomeController extends Controller{
                   'type.id as typeId '+
                   ' from article left join type on article.type_id=type.id '+
                   ' where article.id='+id;
-        console.log(sql)
         const result= await this.app.mysql.query(sql);
         this.ctx.body={data:result};       
+    }
+    async getTypeInfo(){
+        const result=await this.app.mysql.select('type')
+        this.ctx.body={data:result}
     }
 }
