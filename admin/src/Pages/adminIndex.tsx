@@ -8,6 +8,8 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import '../static/css/adminIndex.css'
+import {Route} from 'react-router-dom'
+import AddArticle1 from './AddArticle'
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -48,8 +50,11 @@ const AdminIndex =()=> {
               <Breadcrumb.Item>WorkBench</Breadcrumb.Item>
             </Breadcrumb>
             <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-              Akin Blog Console.
+              <div>
+                    <Route path="/" exact component={AddArticle1} />
+              </div>
             </div>
+
           </Content>
           <Footer style={{ textAlign: 'center' }}>Akin Huang .React,typescript</Footer>
         </Layout>
