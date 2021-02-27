@@ -9,7 +9,7 @@ import {
 } from '@ant-design/icons';
 import '../static/css/adminIndex.css'
 import {Route} from 'react-router-dom'
-import AddArticle1 from './AddArticle'
+import AddArticle from './AddArticle'
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -43,7 +43,6 @@ const AdminIndex =()=> {
           </Menu>
         </Sider>
         <Layout className="site-layout">
-          <Header className="site-layout-background" style={{ padding: 0 }} />
           <Content style={{ margin: '0 16px' }}>
             <Breadcrumb style={{ margin: '16px 0' }}>
               <Breadcrumb.Item>Blog Console</Breadcrumb.Item>
@@ -51,7 +50,8 @@ const AdminIndex =()=> {
             </Breadcrumb>
             <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
               <div>
-                    <Route path="/" exact component={AddArticle1} />
+                    <Route path="/index/" exact component={AddArticle} /> 
+                    {/* 和当前页面的路由一样，表示进入该页就加载这个路由。 */}
               </div>
             </div>
 
