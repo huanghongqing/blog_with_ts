@@ -3,14 +3,14 @@
 
 import 'egg';
 import ExportHome from '../../../app/controller/home';
-import ExportAdminHome from '../../../app/controller/admin/home';
+import ExportAdminMain from '../../../app/controller/admin/main';
 import ExportDefaultHome from '../../../app/controller/default/home';
 
 declare module 'egg' {
   interface IController {
     home: ExportHome;
     admin: {
-      home: ExportAdminHome;
+      main: ExportAdminMain;
     }
     default: {
       home: ExportDefaultHome;
