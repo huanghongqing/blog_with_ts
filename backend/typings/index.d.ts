@@ -125,6 +125,8 @@ declare module 'egg' {
 
     /** 回滚事务 */
     rollback(): Promise<void>;
+    /** mysql.escape 防止sql注入 */
+    escape(str: string): string;
   }
   interface Application {
     mysql: mysql;

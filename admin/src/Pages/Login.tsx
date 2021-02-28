@@ -12,7 +12,6 @@ const Login=(props:any)=>{
     const [password,setPassword]=useState('')
     const [isLoading,setIsLoading]=useState(false)
     const checkLogin=()=>{
-        setIsLoading(true)
         if(!userName){
             message.error('invalid userName')
             return false
@@ -20,6 +19,7 @@ const Login=(props:any)=>{
             message.error('invalid password')
             return false
         }
+        setIsLoading(true)
         let dataProps={
             'userName':userName,'password':password
         }

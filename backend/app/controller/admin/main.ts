@@ -12,7 +12,8 @@ export default class MainController extends Controller{
         let userName =this.ctx.request.body.userName;
         let password = this.ctx.request.body.password;
         //后续增补处理防止sql注入
-        const sql ="select userName from admin_user where userName ='"+userName+"' and password='"+password+"'"
+        const sql ="select userName from admin_user where userName ="+this.app.mysql.escape(userName)+" and password="+this.app.mysql.escape(password)
+        console.log(sql)
         const result =await this.app.mysql.query(sql)
         if(result.length>0) {
             let openId=new Date().getTime()
