@@ -9,10 +9,8 @@ export default class MainController extends Controller{
         this.ctx.body="Admin API...";       
     }
     async checkLogin(){
-        // let userName =this.ctx.request.body.userName;
-        // let password = this.ctx.request.body.password;
-        let userName="abc"
-        let password="efg"
+        let userName =this.ctx.request.body.userName;
+        let password = this.ctx.request.body.password;
         //后续增补处理防止sql注入
         const sql ="select userName from admin_user where userName ='"+userName+"' and password='"+password+"'"
         const result =await this.app.mysql.query(sql)

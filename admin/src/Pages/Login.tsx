@@ -1,18 +1,51 @@
 import React,{useState} from 'react'
 import 'antd/dist/antd.css'
-import {Card,Input,Button,Spin} from 'antd'
+import {Card,Input,Button,Spin,message} from 'antd'
 import '../static/css/Login.css';
 import {UserOutlined,FilePptOutlined} from '@ant-design/icons'
+import servicePath from '../config/ApiUrl'
+import axios from 'axios'
 
-const Login=()=>{
+
+const Login=(props:any)=>{
     const [userName,setUsername]=useState('')
     const [password,setPassword]=useState('')
     const [isLoading,setIsLoading]=useState(false)
     const checkLogin=()=>{
         setIsLoading(true)
-        setTimeout(() => {
-            setIsLoading(false)
-        }, 1000)
+        if(!userName){
+            message.error('invalid userName')
+            return false
+        }else if(!password){
+            message.error('invalid password')
+            return false
+        }
+        let dataProps={
+            'userName':userName,'password':password
+        }
+        axios({
+            method:'post',
+            url:servicePath.checkLogin,
+            data:dataProps,
+            withCredentials:true,
+        }).then(
+            (res)=>{
+                setIsLoading(false)
+                if(res.data.data){
+                    localStorage.setItem('openId',res.data.openId)
+                    let flag=res.data.data
+                    if(flag=="login success"){
+                        props.history.push('/index')
+                    }else{
+                        message.error('login failed.')
+                    }
+                }
+            }
+        ).catch(
+            (error)=>{
+                message.error(error)
+            }
+        )
     }
     return(
         <div className="login-div">
