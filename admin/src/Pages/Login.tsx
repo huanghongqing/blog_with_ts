@@ -27,13 +27,14 @@ const Login=(props:any)=>{
             method:'post',
             url:servicePath.checkLogin,
             data:dataProps,
-            withCredentials:true,
         }).then(
             (res)=>{
-                setIsLoading(false)
+                // setIsLoading(false)
                 if(res.data.data){
                     localStorage.setItem('openId',res.data.openId)
                     let flag=res.data.data
+                    console.log("flag==")
+                    console.log(flag)
                     if(flag=="login success"){
                         props.history.push('/index')
                     }else{
@@ -43,7 +44,8 @@ const Login=(props:any)=>{
             }
         ).catch(
             (error)=>{
-                message.error(error)
+               console.log("error==")
+               console.log(error)
             }
         )
     }

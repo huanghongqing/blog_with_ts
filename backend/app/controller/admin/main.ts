@@ -23,4 +23,8 @@ export default class MainController extends Controller{
             this.ctx.body={'data':'login failed.'}
         }
     }
+    async getTypeInfo(){
+        const resType =await this.app.mysql.select('type')
+        this.ctx.body={'data':resType}
+    }
 }
