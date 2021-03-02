@@ -27,6 +27,7 @@ const Login=(props:any)=>{
             method:'post',
             url:servicePath.checkLogin,
             data:dataProps,
+            //withCredentials:true,//这里不加这个为true，路由守卫里会取不到值，因为不上传cookie
         }).then(
             (res)=>{
                 // setIsLoading(false)

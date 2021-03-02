@@ -18,6 +18,7 @@ export default class MainController extends Controller{
         if(result.length>0) {
             let openId=new Date().getTime()
             this.ctx.session.openId={"openId":openId}
+            console.log(this.ctx.session.openId)
             this.ctx.body={'data':'login success','openId':openId}
         }else{
             this.ctx.body={'data':'login failed.'}

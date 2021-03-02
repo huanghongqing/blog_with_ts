@@ -1,4 +1,4 @@
-import React,{ useState} from 'react'
+import React,{ useState,useEffect} from 'react'
 import { Layout, Menu, Breadcrumb } from 'antd';
 import {
   DesktopOutlined,
@@ -10,6 +10,7 @@ import {
 import '../static/css/adminIndex.css'
 import {Route} from 'react-router-dom'
 import AddArticle from './AddArticle'
+
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;

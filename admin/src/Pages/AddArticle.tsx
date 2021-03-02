@@ -1,15 +1,24 @@
-import React,{ useState } from 'react'
+import React,{ useEffect, useState } from 'react'
 import 'antd/dist/antd.css'
-import {Row,Col,Input,Select,Button,DatePicker} from 'antd'
+import {Row,Col,Input,Select,Button,DatePicker, message} from 'antd'
 import '../static/css/Login.css';
 import {UserOutlined,FilePptOutlined} from '@ant-design/icons'
 import marked from 'marked'
 import '../static/css/AddArticle.css'
+import servicePath from '../config/ApiUrl'
+import axios from 'axios';
 
 const {Option} = Select //从select 接口里获取Option对象
 const {TextArea} =Input
 
-function AddArticle(){
+interface ITypeInfo{
+    id:number;
+    typeName:string;
+    orderNum:number;
+    icon:string;
+}
+
+function AddArticle(props:any){
     const [articleId,setArticleId] = useState(0)  // 文章的ID，如果是0说明是新增加，如果不是0，说明是修改
     const [articleTitle,setArticleTitle] = useState('')   //文章标题
     const [articleContent , setArticleContent] = useState('')  //markdown的编辑内容
@@ -19,8 +28,13 @@ function AddArticle(){
     const [showDate,setShowDate] = useState()   //发布日期
     const [updateDate,setUpdateDate] = useState() //修改日志的日期
     const [typeInfo ,setTypeInfo] = useState([]) // 文章类别信息
-    const [selectedType,setSelectType] = useState(1) //选择的文章类别
+    const [selectedType,setSelectType] = useState('select Type') //选择的文章类别
     const renderer=new marked.Renderer()
+    useEffect(
+        ()=>{
+            getTypeInfo()
+        },[]
+    )
     marked.setOptions({
         renderer: renderer,
         gfm: true,
@@ -41,6 +55,21 @@ function AddArticle(){
          let html=marked(e.target.value)
          setIntroducehtml(html)
       }
+      const getTypeInfo=()=>{
+         axios({
+             method:"get",url:servicePath.getTypeInfo,
+             withCredentials:true,//这里不加这个为true，路由守卫里会取不到值，因为不上传cookie，cookie上传后才有openId到路由守卫中
+         }).then(
+             (res)=>{
+                 if(res.data.data=='No Login'){
+                     localStorage.removeItem('openId')
+                     props.history.push("/login")
+                 }else{
+                     setTypeInfo(res.data.data)
+                 }
+             }
+         )
+      }
     return(
         <div>
             <Row gutter={5}>
@@ -54,10 +83,19 @@ function AddArticle(){
                         </Col>
                         <Col span={4}>
                             &nbsp;
-                            <Select defaultValue="1" size="large">
-                                <Option value="1">code</Option>
+                            <Select defaultValue={selectedType} size="large">
+                                {
+                                       typeInfo.map(
+                                           (item:ITypeInfo,index)=>{
+                                               return(
+                                                <Option key={index} value={item.id}>{item.typeName}</Option>
+                                               )
+                                           }
+                                       )     
+                                }
+                                {/* <Option value="1">code</Option>
                                 <Option value="2">Linux</Option>
-                                <Option value="3">warthunder</Option>
+                                <Option value="3">warthunder</Option> */}
                             </Select>
                         </Col>
                     </Row>
