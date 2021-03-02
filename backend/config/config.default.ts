@@ -13,7 +13,7 @@ export default (appInfo: EggAppInfo) => {
   config.mysql = {
     client: {
       host: 'localhost',//数据库连接地址
-      port: 3306,//端口号
+      port: 33060,//端口号
       user: 'root',//用户名
       password: '123456',//密码
       database: 'blog'//数据库名
