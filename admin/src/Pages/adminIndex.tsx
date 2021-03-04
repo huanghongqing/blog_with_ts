@@ -1,14 +1,14 @@
+// eslint-disable-next-line
 import React,{ useState,useEffect} from 'react'
 import { Layout, Menu, Breadcrumb } from 'antd';
 import {
   DesktopOutlined,
   PieChartOutlined,
   FileOutlined,
-  TeamOutlined,
   UserOutlined,
 } from '@ant-design/icons';
 import '../static/css/adminIndex.css'
-import {Route} from 'react-router-dom'
+import {Route, Switch} from 'react-router-dom'
 import AddArticle from './AddArticle'
 import ArticleList from './ArticleList';
 
@@ -62,10 +62,13 @@ const AdminIndex =(props:any)=> {
             </Breadcrumb>
             <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
               <div>
+
                     <Route path="/index/" exact component={AddArticle} /> 
-                    {/* 和当前页面的路由一样，表示进入该页就加载这个路由。 */}
-                    <Route path="/index/add/" exact component={AddArticle} />
-                    <Route path="/index/list/" exact component={ArticleList} />
+                    {/* 和当前页面的路由一样，表示进入该页就加载这个路由。而且这里必须加exact 用于精确匹配保证默认页面是addArticle */}
+                    <Route path="/index/add"   component={AddArticle} />
+                    <Route path="/index/list"   component={ArticleList} />
+                    {/* 嵌套路由的重点在于，嵌套路由，不能在父级加 exact(精准匹配)，因为先要匹配 父级 然后才能匹配 子集
+                      比如：/nested/a ， 会先匹配父级 /nested 后才能匹配 /nested/a */}
               </div>
             </div>
 
