@@ -19,11 +19,11 @@ interface IListData {
   id:number;
   title:string;
   introduce:string;
-  content:string;
+  article_content:string;
   addTime:Date;
   view_count:number;
   typeName:string;
-  typeId:number;
+  type_id:number;
 }
 
 const Detailed = (article:IListData) => {
@@ -47,7 +47,7 @@ const Detailed = (article:IListData) => {
       return hljs.highlightAuto(code).value
     }
   })
-  let html=marked(article.content)
+  let html=marked(article.article_content)
 
   return(
     <>

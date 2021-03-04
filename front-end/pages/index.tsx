@@ -20,7 +20,7 @@ interface IListData {
   introduce:string;
   addTime:Date;
   view_count:number;
-  content:string;
+  article_content:string;
   typeName:string;
 }
 
