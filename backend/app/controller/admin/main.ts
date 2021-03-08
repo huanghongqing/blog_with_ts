@@ -46,4 +46,33 @@ export default class MainController extends Controller{
             isSuccess:insertSuccess,
         }        
     }
+    async getArticleList(){
+        //let id= this.ctx.params.id;
+        let sql= 'select article.id as id,'+
+                  'article.title as title, ' +
+                  'article.introduce as introduce, ' +
+                  'article.article_content as content ,' +
+                  "FROM_UNIXTIME(article.addTIme,'%Y-%m-%d %H:%i:%s') as addTime ," +
+                  'article.view_count as view_count ,' +
+                  'type.typeName as typeName ,'+
+                  'type.id as typeId, '+
+                  'article.delete_flag as delete_flag '+
+                  ' from article left join type on article.type_id=type.id order by addTime desc';
+                  //' where article.id='+id;
+        const result= await this.app.mysql.query(sql);
+        this.ctx.body={data:result};
+    }
+    async deleteArticle(){
+        let id=this.ctx.params.id
+        let row={
+            id:id,
+            delete_flag:"1",
+        }
+        const res=await this.app.mysql.update('article',row)
+        if(res.affectedRows>=1){
+            this.ctx.body={data:"delete success"}
+        }else{
+            this.ctx.body={data:"delete failed"}
+        }
+    }
 }

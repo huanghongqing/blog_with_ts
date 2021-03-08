@@ -19,7 +19,7 @@ export default class HomeController extends Controller{
                   'article.view_count as view_count ,' +
                   'type.typeName as typeName ,'+
                   'type.id as typeId '+
-                  ' from article left join type on article.type_id=type.id order by addTime desc';
+                  ' from article left join type on article.type_id=type.id where delete_flag="0" order by addTime desc';
                   //' where article.id='+id;
         const result= await this.app.mysql.query(sql);
         this.ctx.body={data:result};
